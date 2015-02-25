@@ -6,12 +6,24 @@ public class Yatzy
     public static final int NUMBERS = 6;
     public static final int DICES = 5;
 
+    protected int[] dice;
+
+    public Yatzy(int d1, int d2, int d3, int d4, int d5)
+    {
+        dice = new int[DICES];
+        dice[0] = d1;
+        dice[1] = d2;
+        dice[2] = d3;
+        dice[3] = d4;
+        dice[4] = d5;
+    }
+
     public int chance()
     {
         return Arrays.stream(dice).sum();
     }
 
-    public static int yatzy(int... dice)
+    public int yatzy()
     {
         int[] counts = new int[NUMBERS];
         for (int die : dice)
@@ -28,147 +40,49 @@ public class Yatzy
         return 0;
     }
 
-    public static int ones(int d1, int d2, int d3, int d4, int d5)
+    public int ones()
     {
-        int sum = 0;
-        if (d1 == 1)
-        {
-            sum++;
-        }
-        if (d2 == 1)
-        {
-            sum++;
-        }
-        if (d3 == 1)
-        {
-            sum++;
-        }
-        if (d4 == 1)
-        {
-            sum++;
-        }
-        if (d5 == 1)
-        {
-            sum++;
-        }
-
-        return sum;
+        return countValue(1);
     }
 
-    public static int twos(int d1, int d2, int d3, int d4, int d5)
+    private int countValue(final int value)
     {
-        int sum = 0;
-        if (d1 == 2)
-        {
-            sum += 2;
-        }
-        if (d2 == 2)
-        {
-            sum += 2;
-        }
-        if (d3 == 2)
-        {
-            sum += 2;
-        }
-        if (d4 == 2)
-        {
-            sum += 2;
-        }
-        if (d5 == 2)
-        {
-            sum += 2;
-        }
-        return sum;
+        return (int) Arrays.stream(dice).filter(d -> d == value).count() * value;
     }
 
-    public static int threes(int d1, int d2, int d3, int d4, int d5)
+    public int twos()
     {
-        int s;
-        s = 0;
-        if (d1 == 3)
-        {
-            s += 3;
-        }
-        if (d2 == 3)
-        {
-            s += 3;
-        }
-        if (d3 == 3)
-        {
-            s += 3;
-        }
-        if (d4 == 3)
-        {
-            s += 3;
-        }
-        if (d5 == 3)
-        {
-            s += 3;
-        }
-        return s;
+        return countValue(2);
     }
 
-    protected int[] dice;
-
-    public Yatzy(int d1, int d2, int d3, int d4, int d5)
+    public int threes()
     {
-        dice = new int[DICES];
-        dice[0] = d1;
-        dice[1] = d2;
-        dice[2] = d3;
-        dice[3] = d4;
-        dice[4] = d5;
+        return countValue(3);
     }
 
     public int fours()
     {
-        int sum;
-        sum = 0;
-        for (int at = 0; at < DICES; at++)
-        {
-            if (dice[at] == 4)
-            {
-                sum += 4;
-            }
-        }
-        return sum;
+        return countValue(4);
     }
 
     public int fives()
     {
-        int s = 0;
-        int i;
-        for (i = 0; i < DICES; i++)
-        {
-            if (dice[i] == 5)
-            {
-                s = s + 5;
-            }
-        }
-        return s;
+        return countValue(5);
     }
 
     public int sixes()
     {
-        int sum = 0;
-        for (int at = 0; at < DICES; at++)
-        {
-            if (dice[at] == NUMBERS)
-            {
-                sum = sum + NUMBERS;
-            }
-        }
-        return sum;
+        return countValue(6);
     }
 
-    public static int scorePair(int d1, int d2, int d3, int d4, int d5)
+    public int scorePair()
     {
         int[] counts = new int[NUMBERS];
-        counts[d1 - 1]++;
-        counts[d2 - 1]++;
-        counts[d3 - 1]++;
-        counts[d4 - 1]++;
-        counts[d5 - 1]++;
+        counts[dice[0] - 1]++;
+        counts[dice[2-1] - 1]++;
+        counts[dice[3-1] - 1]++;
+        counts[dice[4-1] - 1]++;
+        counts[dice[5-1] - 1]++;
         int at;
         for (at = 0; at < NUMBERS; at++)
         {
@@ -180,14 +94,14 @@ public class Yatzy
         return 0;
     }
 
-    public static int twoPair(int d1, int d2, int d3, int d4, int d5)
+    public int twoPair()
     {
         int[] counts = new int[NUMBERS];
-        counts[d1 - 1]++;
-        counts[d2 - 1]++;
-        counts[d3 - 1]++;
-        counts[d4 - 1]++;
-        counts[d5 - 1]++;
+        counts[dice[1-1] - 1]++;
+        counts[dice[2-1] - 1]++;
+        counts[dice[3-1] - 1]++;
+        counts[dice[4-1] - 1]++;
+        counts[dice[5-1] - 1]++;
         int n = 0;
         int score = 0;
         for (int i = 0; i < NUMBERS; i += 1)
@@ -208,15 +122,15 @@ public class Yatzy
         }
     }
 
-    public static int fourOfAKind(int d1, int d2, int d3, int d4, int d5)
+    public int fourOfAKind()
     {
         int[] tallies;
         tallies = new int[NUMBERS];
-        tallies[d1 - 1]++;
-        tallies[d2 - 1]++;
-        tallies[d3 - 1]++;
-        tallies[d4 - 1]++;
-        tallies[d5 - 1]++;
+        tallies[dice[1-1] - 1]++;
+        tallies[dice[2-1] - 1]++;
+        tallies[dice[3-1] - 1]++;
+        tallies[dice[4-1] - 1]++;
+        tallies[dice[5-1] - 1]++;
         for (int i = 0; i < NUMBERS; i++)
         {
             if (tallies[i] >= 4)
@@ -227,15 +141,15 @@ public class Yatzy
         return 0;
     }
 
-    public static int threeOfAKind(int d1, int d2, int d3, int d4, int d5)
+    public int threeOfAKind()
     {
         int[] t;
         t = new int[NUMBERS];
-        t[d1 - 1]++;
-        t[d2 - 1]++;
-        t[d3 - 1]++;
-        t[d4 - 1]++;
-        t[d5 - 1]++;
+        t[dice[1-1] - 1]++;
+        t[dice[2-1] - 1]++;
+        t[dice[3-1] - 1]++;
+        t[dice[4-1] - 1]++;
+        t[dice[5-1] - 1]++;
         for (int i = 0; i < NUMBERS; i++)
         {
             if (t[i] >= 3)
@@ -246,15 +160,15 @@ public class Yatzy
         return 0;
     }
 
-    public static int smallStraight(int d1, int d2, int d3, int d4, int d5)
+    public int smallStraight()
     {
         int[] tallies;
         tallies = new int[NUMBERS];
-        tallies[d1 - 1] += 1;
-        tallies[d2 - 1] += 1;
-        tallies[d3 - 1] += 1;
-        tallies[d4 - 1] += 1;
-        tallies[d5 - 1] += 1;
+        tallies[dice[1-1] - 1] += 1;
+        tallies[dice[2-1] - 1] += 1;
+        tallies[dice[3-1] - 1] += 1;
+        tallies[dice[4-1] - 1] += 1;
+        tallies[dice[5-1] - 1] += 1;
         if (tallies[0] == 1 &&
                 tallies[1] == 1 &&
                 tallies[2] == 1 &&
@@ -266,15 +180,15 @@ public class Yatzy
         return 0;
     }
 
-    public static int largeStraight(int d1, int d2, int d3, int d4, int d5)
+    public int largeStraight()
     {
         int[] tallies;
         tallies = new int[NUMBERS];
-        tallies[d1 - 1] += 1;
-        tallies[d2 - 1] += 1;
-        tallies[d3 - 1] += 1;
-        tallies[d4 - 1] += 1;
-        tallies[d5 - 1] += 1;
+        tallies[dice[1-1] - 1] += 1;
+        tallies[dice[2-1] - 1] += 1;
+        tallies[dice[3-1] - 1] += 1;
+        tallies[dice[4-1] - 1] += 1;
+        tallies[dice[5-1] - 1] += 1;
         if (tallies[1] == 1 &&
                 tallies[2] == 1 &&
                 tallies[3] == 1 &&
@@ -285,7 +199,7 @@ public class Yatzy
         return 0;
     }
 
-    public static int fullHouse(int d1, int d2, int d3, int d4, int d5)
+    public int fullHouse()
     {
         int[] tallies;
         boolean _2 = false;
@@ -295,11 +209,11 @@ public class Yatzy
         int _3_at = 0;
 
         tallies = new int[NUMBERS];
-        tallies[d1 - 1] += 1;
-        tallies[d2 - 1] += 1;
-        tallies[d3 - 1] += 1;
-        tallies[d4 - 1] += 1;
-        tallies[d5 - 1] += 1;
+        tallies[dice[1-1] - 1] += 1;
+        tallies[dice[2-1] - 1] += 1;
+        tallies[dice[3-1] - 1] += 1;
+        tallies[dice[4-1] - 1] += 1;
+        tallies[dice[5-1] - 1] += 1;
 
         for (i = 0; i != NUMBERS; i += 1)
         {
