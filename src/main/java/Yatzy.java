@@ -1,4 +1,9 @@
 import java.util.Arrays;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import org.apache.commons.lang3.ArrayUtils;
 
 public class Yatzy
 {
@@ -69,14 +74,14 @@ public class Yatzy
         return countValue(6);
     }
 
-    public int scorePair()
+    public int pair()
     {
         int[] counts = new int[NUMBERS];
         counts[roll.dice()[0] - 1]++;
-        counts[roll.dice()[2-1] - 1]++;
-        counts[roll.dice()[3-1] - 1]++;
-        counts[roll.dice()[4-1] - 1]++;
-        counts[roll.dice()[5-1] - 1]++;
+        counts[roll.dice()[2 - 1] - 1]++;
+        counts[roll.dice()[3 - 1] - 1]++;
+        counts[roll.dice()[4 - 1] - 1]++;
+        counts[roll.dice()[5 - 1] - 1]++;
         int at;
         for (at = 0; at < NUMBERS; at++)
         {
@@ -91,11 +96,11 @@ public class Yatzy
     public int twoPair()
     {
         int[] counts = new int[NUMBERS];
-        counts[roll.dice()[1-1] - 1]++;
-        counts[roll.dice()[2-1] - 1]++;
-        counts[roll.dice()[3-1] - 1]++;
-        counts[roll.dice()[4-1] - 1]++;
-        counts[roll.dice()[5-1] - 1]++;
+        counts[roll.dice()[1 - 1] - 1]++;
+        counts[roll.dice()[2 - 1] - 1]++;
+        counts[roll.dice()[3 - 1] - 1]++;
+        counts[roll.dice()[4 - 1] - 1]++;
+        counts[roll.dice()[5 - 1] - 1]++;
         int n = 0;
         int score = 0;
         for (int i = 0; i < NUMBERS; i += 1)
@@ -120,11 +125,11 @@ public class Yatzy
     {
         int[] tallies;
         tallies = new int[NUMBERS];
-        tallies[roll.dice()[1-1] - 1]++;
-        tallies[roll.dice()[2-1] - 1]++;
-        tallies[roll.dice()[3-1] - 1]++;
-        tallies[roll.dice()[4-1] - 1]++;
-        tallies[roll.dice()[5-1] - 1]++;
+        tallies[roll.dice()[1 - 1] - 1]++;
+        tallies[roll.dice()[2 - 1] - 1]++;
+        tallies[roll.dice()[3 - 1] - 1]++;
+        tallies[roll.dice()[4 - 1] - 1]++;
+        tallies[roll.dice()[5 - 1] - 1]++;
         for (int i = 0; i < NUMBERS; i++)
         {
             if (tallies[i] >= 4)
@@ -139,11 +144,11 @@ public class Yatzy
     {
         int[] t;
         t = new int[NUMBERS];
-        t[roll.dice()[1-1] - 1]++;
-        t[roll.dice()[2-1] - 1]++;
-        t[roll.dice()[3-1] - 1]++;
-        t[roll.dice()[4-1] - 1]++;
-        t[roll.dice()[5-1] - 1]++;
+        t[roll.dice()[1 - 1] - 1]++;
+        t[roll.dice()[2 - 1] - 1]++;
+        t[roll.dice()[3 - 1] - 1]++;
+        t[roll.dice()[4 - 1] - 1]++;
+        t[roll.dice()[5 - 1] - 1]++;
         for (int i = 0; i < NUMBERS; i++)
         {
             if (t[i] >= 3)
@@ -158,11 +163,11 @@ public class Yatzy
     {
         int[] tallies;
         tallies = new int[NUMBERS];
-        tallies[roll.dice()[1-1] - 1] += 1;
-        tallies[roll.dice()[2-1] - 1] += 1;
-        tallies[roll.dice()[3-1] - 1] += 1;
-        tallies[roll.dice()[4-1] - 1] += 1;
-        tallies[roll.dice()[5-1] - 1] += 1;
+        tallies[roll.dice()[1 - 1] - 1] += 1;
+        tallies[roll.dice()[2 - 1] - 1] += 1;
+        tallies[roll.dice()[3 - 1] - 1] += 1;
+        tallies[roll.dice()[4 - 1] - 1] += 1;
+        tallies[roll.dice()[5 - 1] - 1] += 1;
         if (tallies[0] == 1 &&
                 tallies[1] == 1 &&
                 tallies[2] == 1 &&
@@ -178,11 +183,11 @@ public class Yatzy
     {
         int[] tallies;
         tallies = new int[NUMBERS];
-        tallies[roll.dice()[1-1] - 1] += 1;
-        tallies[roll.dice()[2-1] - 1] += 1;
-        tallies[roll.dice()[3-1] - 1] += 1;
-        tallies[roll.dice()[4-1] - 1] += 1;
-        tallies[roll.dice()[5-1] - 1] += 1;
+        tallies[roll.dice()[1 - 1] - 1] += 1;
+        tallies[roll.dice()[2 - 1] - 1] += 1;
+        tallies[roll.dice()[3 - 1] - 1] += 1;
+        tallies[roll.dice()[4 - 1] - 1] += 1;
+        tallies[roll.dice()[5 - 1] - 1] += 1;
         if (tallies[1] == 1 &&
                 tallies[2] == 1 &&
                 tallies[3] == 1 &&
@@ -203,11 +208,11 @@ public class Yatzy
         int _3_at = 0;
 
         tallies = new int[NUMBERS];
-        tallies[roll.dice()[1-1] - 1] += 1;
-        tallies[roll.dice()[2-1] - 1] += 1;
-        tallies[roll.dice()[3-1] - 1] += 1;
-        tallies[roll.dice()[4-1] - 1] += 1;
-        tallies[roll.dice()[5-1] - 1] += 1;
+        tallies[roll.dice()[1 - 1] - 1] += 1;
+        tallies[roll.dice()[2 - 1] - 1] += 1;
+        tallies[roll.dice()[3 - 1] - 1] += 1;
+        tallies[roll.dice()[4 - 1] - 1] += 1;
+        tallies[roll.dice()[5 - 1] - 1] += 1;
 
         for (i = 0; i != NUMBERS; i += 1)
         {
@@ -235,5 +240,12 @@ public class Yatzy
         {
             return 0;
         }
+    }
+
+    public Map<Integer, Long> occurences()
+    {
+        Integer[] dice = ArrayUtils.toObject(roll.dice());
+        Stream<Integer> stream = Arrays.stream(dice);
+        return stream.collect(Collectors.groupingBy(e -> e, Collectors.counting()));
     }
 }

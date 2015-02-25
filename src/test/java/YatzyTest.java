@@ -66,10 +66,12 @@ public class YatzyTest {
 
     @Test
     public void one_pair() {
-        assertEquals(6, new Yatzy(new Roll(3, 4, 3, 5, 6)).scorePair());
-        assertEquals(0, new Yatzy(new Roll(1, 4, 3, 5, 6)).scorePair());
-        assertEquals(10, new Yatzy(new Roll(5, 3, 3, 3, 5)).scorePair());
-        assertEquals(12, new Yatzy(new Roll(5, 3, 6, 6, 5)).scorePair());
+        assertEquals(6, new Yatzy(new Roll(3, 4, 3, 5, 6)).pair());
+        assertEquals(0, new Yatzy(new Roll(1, 4, 3, 5, 6)).pair());
+        assertEquals(10, new Yatzy(new Roll(5, 3, 3, 3, 5)).pair());
+        assertEquals(10, new Yatzy(new Roll(5, 3, 3, 5, 5)).pair());
+        assertEquals(12, new Yatzy(new Roll(5, 3, 6, 6, 5)).pair());
+        assertEquals(8, new Yatzy(new Roll(4, 4, 4, 6, 5)).pair());
     }
 
     @Test
@@ -114,5 +116,13 @@ public class YatzyTest {
     public void fullHouse() {
         assertEquals(18, new Yatzy(new Roll(6,2,2,2,6)).fullHouse());
         assertEquals(0, new Yatzy(new Roll(2,3,4,5,6)).fullHouse());
+    }
+
+    @Test
+    public void testOccurencesReturn2() {
+        Yatzy yatzy = new Yatzy(new Roll(2, 1, 3, 2, 4));
+
+        Long occurenceOfTwo = yatzy.occurences().get(2);
+        assertEquals(2L, (long)occurenceOfTwo);
     }
 }
