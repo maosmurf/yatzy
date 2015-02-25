@@ -4,7 +4,6 @@ public class Yatzy
 {
 
     public static final int NUMBERS = 6;
-    public static final int DICES = 5;
 
     private final Roll roll;
 
@@ -27,7 +26,7 @@ public class Yatzy
         }
         for (int i = 0; i < NUMBERS; i++)
         {
-            if (counts[i] == DICES)
+            if (counts[i] == roll.dice().length)
             {
                 return 50;
             }
