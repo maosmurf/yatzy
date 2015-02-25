@@ -1,5 +1,8 @@
-import org.junit.*;
-import static org.junit.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 public class YatzyTest {
 
@@ -125,4 +128,6 @@ public class YatzyTest {
         Long occurenceOfTwo = yatzy.occurences().get(2);
         assertEquals(2L, (long)occurenceOfTwo);
     }
+
+
 }
