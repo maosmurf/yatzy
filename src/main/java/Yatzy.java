@@ -1,27 +1,26 @@
+import java.util.Arrays;
+
 public class Yatzy
 {
 
-    public static int chance(int d1, int d2, int d3, int d4, int d5)
+    public static final int NUMBERS = 6;
+    public static final int DICES = 5;
+
+    public int chance()
     {
-        int total = 0;
-        total += d1;
-        total += d2;
-        total += d3;
-        total += d4;
-        total += d5;
-        return total;
+        return Arrays.stream(dice).sum();
     }
 
     public static int yatzy(int... dice)
     {
-        int[] counts = new int[6];
+        int[] counts = new int[NUMBERS];
         for (int die : dice)
         {
             counts[die - 1]++;
         }
-        for (int i = 0; i != 6; i++)
+        for (int i = 0; i < NUMBERS; i++)
         {
-            if (counts[i] == 5)
+            if (counts[i] == DICES)
             {
                 return 50;
             }
@@ -111,21 +110,21 @@ public class Yatzy
 
     protected int[] dice;
 
-    public Yatzy(int d1, int d2, int d3, int d4, int _5)
+    public Yatzy(int d1, int d2, int d3, int d4, int d5)
     {
-        dice = new int[5];
+        dice = new int[DICES];
         dice[0] = d1;
         dice[1] = d2;
         dice[2] = d3;
         dice[3] = d4;
-        dice[4] = _5;
+        dice[4] = d5;
     }
 
     public int fours()
     {
         int sum;
         sum = 0;
-        for (int at = 0; at < 5; at++)
+        for (int at = 0; at < DICES; at++)
         {
             if (dice[at] == 4)
             {
@@ -139,7 +138,7 @@ public class Yatzy
     {
         int s = 0;
         int i;
-        for (i = 0; i < dice.length; i++)
+        for (i = 0; i < DICES; i++)
         {
             if (dice[i] == 5)
             {
@@ -152,38 +151,38 @@ public class Yatzy
     public int sixes()
     {
         int sum = 0;
-        for (int at = 0; at < dice.length; at++)
+        for (int at = 0; at < DICES; at++)
         {
-            if (dice[at] == 6)
+            if (dice[at] == NUMBERS)
             {
-                sum = sum + 6;
+                sum = sum + NUMBERS;
             }
         }
         return sum;
     }
 
-    public static int score_pair(int d1, int d2, int d3, int d4, int d5)
+    public static int scorePair(int d1, int d2, int d3, int d4, int d5)
     {
-        int[] counts = new int[6];
+        int[] counts = new int[NUMBERS];
         counts[d1 - 1]++;
         counts[d2 - 1]++;
         counts[d3 - 1]++;
         counts[d4 - 1]++;
         counts[d5 - 1]++;
         int at;
-        for (at = 0; at != 6; at++)
+        for (at = 0; at < NUMBERS; at++)
         {
-            if (counts[6 - at - 1] >= 2)
+            if (counts[NUMBERS - at - 1] >= 2)
             {
-                return (6 - at) * 2;
+                return (NUMBERS - at) * 2;
             }
         }
         return 0;
     }
 
-    public static int two_pair(int d1, int d2, int d3, int d4, int d5)
+    public static int twoPair(int d1, int d2, int d3, int d4, int d5)
     {
-        int[] counts = new int[6];
+        int[] counts = new int[NUMBERS];
         counts[d1 - 1]++;
         counts[d2 - 1]++;
         counts[d3 - 1]++;
@@ -191,12 +190,12 @@ public class Yatzy
         counts[d5 - 1]++;
         int n = 0;
         int score = 0;
-        for (int i = 0; i < 6; i += 1)
+        for (int i = 0; i < NUMBERS; i += 1)
         {
-            if (counts[6 - i - 1] >= 2)
+            if (counts[NUMBERS - i - 1] >= 2)
             {
                 n++;
-                score += (6 - i);
+                score += (NUMBERS - i);
             }
         }
         if (n == 2)
@@ -209,16 +208,16 @@ public class Yatzy
         }
     }
 
-    public static int four_of_a_kind(int _1, int _2, int d3, int d4, int d5)
+    public static int fourOfAKind(int d1, int d2, int d3, int d4, int d5)
     {
         int[] tallies;
-        tallies = new int[6];
-        tallies[_1 - 1]++;
-        tallies[_2 - 1]++;
+        tallies = new int[NUMBERS];
+        tallies[d1 - 1]++;
+        tallies[d2 - 1]++;
         tallies[d3 - 1]++;
         tallies[d4 - 1]++;
         tallies[d5 - 1]++;
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < NUMBERS; i++)
         {
             if (tallies[i] >= 4)
             {
@@ -228,16 +227,16 @@ public class Yatzy
         return 0;
     }
 
-    public static int three_of_a_kind(int d1, int d2, int d3, int d4, int d5)
+    public static int threeOfAKind(int d1, int d2, int d3, int d4, int d5)
     {
         int[] t;
-        t = new int[6];
+        t = new int[NUMBERS];
         t[d1 - 1]++;
         t[d2 - 1]++;
         t[d3 - 1]++;
         t[d4 - 1]++;
         t[d5 - 1]++;
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < NUMBERS; i++)
         {
             if (t[i] >= 3)
             {
@@ -250,7 +249,7 @@ public class Yatzy
     public static int smallStraight(int d1, int d2, int d3, int d4, int d5)
     {
         int[] tallies;
-        tallies = new int[6];
+        tallies = new int[NUMBERS];
         tallies[d1 - 1] += 1;
         tallies[d2 - 1] += 1;
         tallies[d3 - 1] += 1;
@@ -270,7 +269,7 @@ public class Yatzy
     public static int largeStraight(int d1, int d2, int d3, int d4, int d5)
     {
         int[] tallies;
-        tallies = new int[6];
+        tallies = new int[NUMBERS];
         tallies[d1 - 1] += 1;
         tallies[d2 - 1] += 1;
         tallies[d3 - 1] += 1;
@@ -295,14 +294,14 @@ public class Yatzy
         boolean _3 = false;
         int _3_at = 0;
 
-        tallies = new int[6];
+        tallies = new int[NUMBERS];
         tallies[d1 - 1] += 1;
         tallies[d2 - 1] += 1;
         tallies[d3 - 1] += 1;
         tallies[d4 - 1] += 1;
         tallies[d5 - 1] += 1;
 
-        for (i = 0; i != 6; i += 1)
+        for (i = 0; i != NUMBERS; i += 1)
         {
             if (tallies[i] == 2)
             {
@@ -311,7 +310,7 @@ public class Yatzy
             }
         }
 
-        for (i = 0; i != 6; i += 1)
+        for (i = 0; i != NUMBERS; i += 1)
         {
             if (tallies[i] == 3)
             {
@@ -330,6 +329,3 @@ public class Yatzy
         }
     }
 }
-
-
-
