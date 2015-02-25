@@ -6,27 +6,22 @@ public class Yatzy
     public static final int NUMBERS = 6;
     public static final int DICES = 5;
 
-    protected int[] dice;
+    private final Roll roll;
 
-    public Yatzy(int d1, int d2, int d3, int d4, int d5)
+    public Yatzy(Roll roll)
     {
-        dice = new int[DICES];
-        dice[0] = d1;
-        dice[1] = d2;
-        dice[2] = d3;
-        dice[3] = d4;
-        dice[4] = d5;
+        this.roll = roll;
     }
 
     public int chance()
     {
-        return Arrays.stream(dice).sum();
+        return Arrays.stream(roll.dice()).sum();
     }
 
     public int yatzy()
     {
         int[] counts = new int[NUMBERS];
-        for (int die : dice)
+        for (int die : roll.dice())
         {
             counts[die - 1]++;
         }
@@ -47,7 +42,7 @@ public class Yatzy
 
     private int countValue(final int value)
     {
-        return (int) Arrays.stream(dice).filter(d -> d == value).count() * value;
+        return (int) Arrays.stream(roll.dice()).filter(d -> d == value).count() * value;
     }
 
     public int twos()
@@ -78,11 +73,11 @@ public class Yatzy
     public int scorePair()
     {
         int[] counts = new int[NUMBERS];
-        counts[dice[0] - 1]++;
-        counts[dice[2-1] - 1]++;
-        counts[dice[3-1] - 1]++;
-        counts[dice[4-1] - 1]++;
-        counts[dice[5-1] - 1]++;
+        counts[roll.dice()[0] - 1]++;
+        counts[roll.dice()[2-1] - 1]++;
+        counts[roll.dice()[3-1] - 1]++;
+        counts[roll.dice()[4-1] - 1]++;
+        counts[roll.dice()[5-1] - 1]++;
         int at;
         for (at = 0; at < NUMBERS; at++)
         {
@@ -97,11 +92,11 @@ public class Yatzy
     public int twoPair()
     {
         int[] counts = new int[NUMBERS];
-        counts[dice[1-1] - 1]++;
-        counts[dice[2-1] - 1]++;
-        counts[dice[3-1] - 1]++;
-        counts[dice[4-1] - 1]++;
-        counts[dice[5-1] - 1]++;
+        counts[roll.dice()[1-1] - 1]++;
+        counts[roll.dice()[2-1] - 1]++;
+        counts[roll.dice()[3-1] - 1]++;
+        counts[roll.dice()[4-1] - 1]++;
+        counts[roll.dice()[5-1] - 1]++;
         int n = 0;
         int score = 0;
         for (int i = 0; i < NUMBERS; i += 1)
@@ -126,11 +121,11 @@ public class Yatzy
     {
         int[] tallies;
         tallies = new int[NUMBERS];
-        tallies[dice[1-1] - 1]++;
-        tallies[dice[2-1] - 1]++;
-        tallies[dice[3-1] - 1]++;
-        tallies[dice[4-1] - 1]++;
-        tallies[dice[5-1] - 1]++;
+        tallies[roll.dice()[1-1] - 1]++;
+        tallies[roll.dice()[2-1] - 1]++;
+        tallies[roll.dice()[3-1] - 1]++;
+        tallies[roll.dice()[4-1] - 1]++;
+        tallies[roll.dice()[5-1] - 1]++;
         for (int i = 0; i < NUMBERS; i++)
         {
             if (tallies[i] >= 4)
@@ -145,11 +140,11 @@ public class Yatzy
     {
         int[] t;
         t = new int[NUMBERS];
-        t[dice[1-1] - 1]++;
-        t[dice[2-1] - 1]++;
-        t[dice[3-1] - 1]++;
-        t[dice[4-1] - 1]++;
-        t[dice[5-1] - 1]++;
+        t[roll.dice()[1-1] - 1]++;
+        t[roll.dice()[2-1] - 1]++;
+        t[roll.dice()[3-1] - 1]++;
+        t[roll.dice()[4-1] - 1]++;
+        t[roll.dice()[5-1] - 1]++;
         for (int i = 0; i < NUMBERS; i++)
         {
             if (t[i] >= 3)
@@ -164,11 +159,11 @@ public class Yatzy
     {
         int[] tallies;
         tallies = new int[NUMBERS];
-        tallies[dice[1-1] - 1] += 1;
-        tallies[dice[2-1] - 1] += 1;
-        tallies[dice[3-1] - 1] += 1;
-        tallies[dice[4-1] - 1] += 1;
-        tallies[dice[5-1] - 1] += 1;
+        tallies[roll.dice()[1-1] - 1] += 1;
+        tallies[roll.dice()[2-1] - 1] += 1;
+        tallies[roll.dice()[3-1] - 1] += 1;
+        tallies[roll.dice()[4-1] - 1] += 1;
+        tallies[roll.dice()[5-1] - 1] += 1;
         if (tallies[0] == 1 &&
                 tallies[1] == 1 &&
                 tallies[2] == 1 &&
@@ -184,11 +179,11 @@ public class Yatzy
     {
         int[] tallies;
         tallies = new int[NUMBERS];
-        tallies[dice[1-1] - 1] += 1;
-        tallies[dice[2-1] - 1] += 1;
-        tallies[dice[3-1] - 1] += 1;
-        tallies[dice[4-1] - 1] += 1;
-        tallies[dice[5-1] - 1] += 1;
+        tallies[roll.dice()[1-1] - 1] += 1;
+        tallies[roll.dice()[2-1] - 1] += 1;
+        tallies[roll.dice()[3-1] - 1] += 1;
+        tallies[roll.dice()[4-1] - 1] += 1;
+        tallies[roll.dice()[5-1] - 1] += 1;
         if (tallies[1] == 1 &&
                 tallies[2] == 1 &&
                 tallies[3] == 1 &&
@@ -209,11 +204,11 @@ public class Yatzy
         int _3_at = 0;
 
         tallies = new int[NUMBERS];
-        tallies[dice[1-1] - 1] += 1;
-        tallies[dice[2-1] - 1] += 1;
-        tallies[dice[3-1] - 1] += 1;
-        tallies[dice[4-1] - 1] += 1;
-        tallies[dice[5-1] - 1] += 1;
+        tallies[roll.dice()[1-1] - 1] += 1;
+        tallies[roll.dice()[2-1] - 1] += 1;
+        tallies[roll.dice()[3-1] - 1] += 1;
+        tallies[roll.dice()[4-1] - 1] += 1;
+        tallies[roll.dice()[5-1] - 1] += 1;
 
         for (i = 0; i != NUMBERS; i += 1)
         {
